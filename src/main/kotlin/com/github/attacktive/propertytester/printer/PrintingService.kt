@@ -17,20 +17,28 @@ class PrintingService(private val environment: Environment) {
 		logger.info("active profiles: $activeProfiles")
 
 		val propertyNames = getRawPropertyNames()
-		logger.info("propertyNames:\n${propertyNames.joinToString("\n")}")
+		logger.info("propertyNames:")
+		logger.info(propertyNames.joinToString("\n"))
 
-		val computedProperties = getComputedProperties(propertyNames.toList().sorted())
+		val computedProperties = propertyNames.toList()
+			.sorted()
+			.associateWith { environment.getProperty(it) }
+
 		val computedPropertiesInString = computedProperties.map { "${it.key}: ${it.value}" }
 			.joinToString("\n")
 
 		logger.info("computedProperties:\n$computedPropertiesInString")
 	}
 
-	private fun getRawPropertyNames(): Set<String> = (environment as AbstractEnvironment).propertySources
-		.filterIsInstance<OriginTrackedMapPropertySource>()
-		.map { it.source }
-		.flatMap { it.keys }
-		.toSet()
+	private fun getRawPropertyNames(): Set<String> {
+		if (environment !is AbstractEnvironment) {
+			throw IllegalStateException("The environment is supposed to be of ${AbstractEnvironment::class.java.name}, but actually is ${environment.javaClass.name}")
+		}
 
-	private fun getComputedProperties(propertyNames: Collection<String>): Map<String, String?> = propertyNames.associateWith { environment.getProperty(it) }
+		return environment.propertySources
+			.filterIsInstance<OriginTrackedMapPropertySource>()
+			.map { it.source }
+			.flatMap { it.keys }
+			.toSet()
+	}
 }
