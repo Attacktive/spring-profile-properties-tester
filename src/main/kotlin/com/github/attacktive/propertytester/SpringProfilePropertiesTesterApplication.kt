@@ -7,9 +7,11 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class SpringProfilePropertiesTesterApplication(private val printingService: PrintingService): CommandLineRunner {
-	override fun run(vararg args: String?) = printingService.printProperties()
+	// Please forgive me. I couldn't resist.
+	@Suppress("LocalVariableName")
+	override fun run(vararg `whateverDude 😏`: String) = printingService.printProperties()
 }
 
-fun main(args: Array<String>) {
-	runApplication<SpringProfilePropertiesTesterApplication>(*args)
+fun main() {
+	runApplication<SpringProfilePropertiesTesterApplication>()
 }
