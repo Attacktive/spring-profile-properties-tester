@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -8,11 +9,8 @@ plugins {
 }
 
 group = "com.github.attacktive"
-version = "0.0.1-SNAPSHOT"
-
-java {
-	sourceCompatibility = JavaVersion.VERSION_17
-}
+version = "1.0.0"
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 repositories {
 	mavenCentral()
@@ -25,9 +23,9 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs += "-Xjsr305=strict"
-		jvmTarget = "17"
+	compilerOptions {
+		freeCompilerArgs = listOf("-Xjsr305=strict")
+		jvmTarget.set(JvmTarget.JVM_21)
 	}
 }
 
