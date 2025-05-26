@@ -18,8 +18,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter")
-
+	testImplementation("org.springframework.boot:spring-boot-starter")
 	testImplementation(kotlin("test"))
 	testImplementation("org.springframework.boot", "spring-boot-starter-test") {
 		exclude(group = "org.junit.jupiter")
