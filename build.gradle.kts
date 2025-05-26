@@ -8,7 +8,7 @@ plugins {
 	kotlin("plugin.spring") version "2.1.21"
 }
 
-group = "com.github.attacktive"
+group = "xyz.github.attacktive"
 version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_21
 
@@ -18,8 +18,13 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+	testImplementation(kotlin("test"))
+	testImplementation("org.springframework.boot", "spring-boot-starter-test") {
+		exclude(group = "org.junit.jupiter")
+		exclude(group = "org.mockito")
+	}
+	testImplementation("org.jetbrains.kotlin:kotlin-reflect")
 }
 
 tasks.withType<KotlinCompile> {

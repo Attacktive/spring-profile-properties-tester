@@ -1,4 +1,0 @@
-a:
-  b: 'default-a.b'
-  c: ['default-a.c1', 'default-a.c2', 'default-a.c3']
-d: 'default: d'
