@@ -9,7 +9,8 @@ import org.springframework.boot.runApplication
 class SpringProfilePropertiesTesterApplication(private val printingService: PrintingService): CommandLineRunner {
 	// Please forgive me. I couldn't resist.
 	@Suppress("LocalVariableName")
-	override fun run(vararg `whateverDude 😏`: String) = printingService.printProperties()
+	//override fun run(vararg `whateverDude 😏`: String) = printingService.printProperties()
+	override fun run(vararg `whateverDude 😏`: String) = printingService.testMalformed()
 }
 
 fun main() {

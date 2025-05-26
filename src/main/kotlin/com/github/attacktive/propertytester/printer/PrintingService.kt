@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.env.OriginTrackedMapPropertySource
 import org.springframework.core.env.AbstractEnvironment
 import org.springframework.core.env.Environment
+import org.springframework.core.env.getProperty
 import org.springframework.stereotype.Service
 
 @Service
@@ -28,6 +29,14 @@ class PrintingService(private val environment: Environment) {
 			.joinToString("\n")
 
 		logger.info("computedProperties:\n$computedPropertiesInString")
+	}
+
+	fun testMalformed() {
+		val stringProperty = environment.getProperty<String>("a.b")
+		logger.info("a.b: $stringProperty")
+
+		val listProperty = environment.getProperty<List<String>>("a.b")
+		logger.info("a.b: $listProperty")
 	}
 
 	private fun getRawPropertyNames(): Set<String> {
