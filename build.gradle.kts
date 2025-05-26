@@ -6,7 +6,6 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.7"
 	kotlin("jvm") version "2.1.21"
 	kotlin("plugin.spring") version "2.1.21"
-	jacoco
 }
 
 group = "xyz.github.attacktive"
@@ -40,23 +39,4 @@ tasks.withType<Test> {
 
 tasks.test {
 	useJUnitPlatform()
-	finalizedBy(tasks.jacocoTestReport)
-}
-
-tasks.jacocoTestReport {
-	dependsOn(tasks.test)
-	reports {
-		xml.required.set(true)
-		html.required.set(true)
-	}
-}
-
-tasks.jacocoTestCoverageVerification {
-	violationRules {
-		rule {
-			limit {
-				minimum = "0.5".toBigDecimal()
-			}
-		}
-	}
 }

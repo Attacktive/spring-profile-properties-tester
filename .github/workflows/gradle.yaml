@@ -24,4 +24,4 @@ jobs:
       - name: 'Build with Gradle'
         run: './gradlew compileKotlin compileTestKotlin'
       - name: 'Run tests with Gradle'
-        run: './gradlew test jacocoTestReport'
+        run: './gradlew test'
